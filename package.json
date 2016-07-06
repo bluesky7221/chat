@@ -1,0 +1,26 @@
+{
+  "name": "chat2",
+  "version": "1.0.0",
+  "description": "chat program",
+  "main": "index.js",
+  "scripts": {
+    "test": "chating"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluesky7221/chat.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "EWC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bluesky7221/chat/issues"
+  },
+  "homepage": "https://github.com/bluesky7221/chat#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.4.8"
+  }
+}
