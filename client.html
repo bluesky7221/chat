@@ -8,6 +8,7 @@
       .name{ width: 10%; }
       .message{ width: 70%; }
       .chat{ width: 10%; }
+      .select{ width: 30%; }
     </style>
   </head>
   <body>
@@ -19,6 +20,18 @@
       <input id="message" class="message" type="text">
       <input type="submit" class="chat" value="chat"/>
     </form>
+    <br>
+    <form id="selectN">
+      <input id="c_name" class="select" type="text">
+      <input type="submit" class="select" value="changeName">
+    </form>
+    <br>
+    <form id="show">
+      <input id="number" class="select" type="text">
+      <input type="submit" class="select" value="showUser">
+    </form>
+    <br>
+    </form>
     <div id="box" class="box">
     <script src="/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -29,12 +42,29 @@
         $('#message').val("");
         e.preventDefault();
       });
+      $('#selectN').on('submit', function(e){
+        socket.emit('send change name', $('#c_name').val());
+        $('#c_name').val("");
+        e.preventDefault();
+      });
+      $('#show').on('submit', function(e){
+        socket.emit('show users', $('#name').val(), $('#number').val());
+        e.preventDefault();
+      });
       socket.on('receive message', function(msg){
         $('#chatLog').append(msg+"\n");
         $('#chatLog').scrollTop($('#chatLog').innerHeight())
       });
+      socket.on('receive disconnected', function(disc_msg){
+        $('#chatLog').append(disc_msg+"\n");
+        $('#chatLog').scrollTop($('#chatLog').innerHeight())
+      });
       socket.on('change name', function(name){
         $('#name').val(name);
+      });
+      socket.on('receive users', function(msg){
+        $('#chatLog').append(msg);
+        $('#chatLog').scrollTop($('#chatLog').innerHeight())
       });
     </script>
   </body>
